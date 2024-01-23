@@ -1,9 +1,7 @@
 package com.example.todo.View.ToDoHomeScreen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,24 +16,20 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key.Companion.Ro
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.todo.Logic.dayAndDate
 import com.example.todo.Logic.generateDayAndDate
-import com.example.todo.Logic.today
 import com.example.todo.Model.HomeScreenData.DayAndDate
 import com.example.todo.R
 import java.time.LocalDate
 
 @Composable
-fun DayButton(
+fun DayAndDateButton(
     day: String,
     date: Int,
     textColor: Color,
@@ -69,7 +63,7 @@ fun DayButton(
 
 @Preview(showBackground = true)
 @Composable
-fun DisplayDayButton1(){
+fun DisplayDayAndDateButton1(){
     val date = LocalDate.now()
     val today = date.dayOfMonth
     val demo = DayAndDate(22, "mon")
@@ -80,14 +74,14 @@ fun DisplayDayButton1(){
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.Top
     ) {
-        DayButton(demo.dayOfWeek, demo.date, textColor = Color.White, buttonColor = colorResource(id = R.color.primary_color))
+        DayAndDateButton(demo.dayOfWeek, demo.date, textColor = Color.White, buttonColor = colorResource(id = R.color.primary_color))
         }
 }
 
 
 @Preview(showBackground = true)
 @Composable
-fun LazyDisplayDayButton2(){
+fun LazyDisplayDayAndDateButton2(){
     generateDayAndDate()
     val date = LocalDate.now()
     val today = date.dayOfMonth
@@ -97,10 +91,10 @@ fun LazyDisplayDayButton2(){
     ){
         items(dayAndDate){day->
             if(today==day.date){
-                DayButton(day.dayOfWeek, day.date, textColor = Color.White, buttonColor = colorResource(id = R.color.primary_color))
+                DayAndDateButton(day.dayOfWeek, day.date, textColor = Color.White, buttonColor = colorResource(id = R.color.primary_color))
             }
             else{
-                DayButton(day.dayOfWeek, day.date, textColor = Color.Black, buttonColor = colorResource(id = R.color.button_grey))
+                DayAndDateButton(day.dayOfWeek, day.date, textColor = Color.Black, buttonColor = colorResource(id = R.color.button_grey))
             }
         }
     }

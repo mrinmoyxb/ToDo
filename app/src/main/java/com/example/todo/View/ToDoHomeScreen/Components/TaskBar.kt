@@ -33,7 +33,7 @@ import com.example.todo.R
 @Composable
 fun TaskBar(
     heading: String,
-    date: String,
+    time: String,
     description: String,
     cardColor: Color,
     buttonColor: Color
@@ -58,7 +58,7 @@ fun TaskBar(
                 .weight(0.9f)
             ){
                 HomeScreenTextComponent(text = heading, fontSize = 30, fontWeight = FontWeight.SemiBold, color = Color.White)
-                HomeScreenTextComponent(text = date, fontSize = 18, fontWeight = FontWeight.Medium, color = Color.White, fontStyle = FontStyle.Italic)
+                HomeScreenTextComponent(text = time, fontSize = 18, fontWeight = FontWeight.Medium, color = Color.White, fontStyle = FontStyle.Italic)
                 Spacer(modifier = Modifier.height(5.dp))
                 Divider(modifier = Modifier.fillMaxWidth(), thickness = 2.dp, color = Color.White)
                 HomeScreenTextComponent(text = description, fontSize = 20 , fontWeight = FontWeight.Medium, color = Color.White, modifier = Modifier.wrapContentHeight())
@@ -95,10 +95,10 @@ fun DisplayTaskBar() {
     Column(
         modifier = Modifier.padding(20.dp)
     ) {
-        TaskBar(heading = "Team meeting", date = "9:00 am", description = "At Office, with boss prepare the presentation, ver 2.0", cardColor = colorResource(
+        TaskBar(heading = "Team meeting", time = "9:00 am", description = "At Office, with boss prepare the presentation, ver 2.0", cardColor = colorResource(
             id = R.color.primary_color), buttonColor = colorResource(id = R.color.black))
         Spacer(modifier = Modifier.height(10.dp))
-        TaskBar(heading = "Submission", date = "1:00 pm", description = "Deadline of project submission", cardColor = colorResource(
+        TaskBar(heading = "Submission", time = "1:00 pm", description = "Deadline of project submission", cardColor = colorResource(
             id = R.color.black), buttonColor = colorResource(id = R.color.primary_color))
     }
 }

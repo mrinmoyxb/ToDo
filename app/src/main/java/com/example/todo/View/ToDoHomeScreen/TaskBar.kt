@@ -2,12 +2,17 @@ package com.example.todo.View.ToDoHomeScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,7 +34,9 @@ import com.example.todo.R
 fun TaskBar(
     heading: String,
     date: String,
-    description: String
+    description: String,
+    cardColor: Color,
+    buttonColor: Color
 ){
     val configuration = LocalConfiguration.current
     val width = configuration.screenWidthDp
@@ -38,25 +45,45 @@ fun TaskBar(
         modifier = Modifier
             .height(150.dp)
             .width((width - 20).dp),
-        colors = CardDefaults.cardColors(colorResource(id = R.color.primary_color))
+        colors = CardDefaults.cardColors(cardColor)
     ){
-        Column(
+
+        Row(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(10.dp)
         ){
-            HomeScreenTextComponent(text = heading, fontSize = 30, fontWeight = FontWeight.SemiBold, color = Color.White)
-            //Spacer(modifier = Modifier.height(5.dp))
-            HomeScreenTextComponent(text = date, fontSize = 21, fontWeight = FontWeight.Medium, color = Color.White, fontStyle = FontStyle.Italic)
-            Spacer(modifier = Modifier.height(5.dp))
-            Divider(modifier = Modifier.fillMaxWidth(), thickness = 2.dp, color = Color.White)
-            HomeScreenTextComponent(text = description, fontSize = 23, fontWeight = FontWeight.Medium, color = Color.White)
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.9f)
+            ){
+                HomeScreenTextComponent(text = heading, fontSize = 30, fontWeight = FontWeight.SemiBold, color = Color.White)
+                HomeScreenTextComponent(text = date, fontSize = 18, fontWeight = FontWeight.Medium, color = Color.White, fontStyle = FontStyle.Italic)
+                Spacer(modifier = Modifier.height(5.dp))
+                Divider(modifier = Modifier.fillMaxWidth(), thickness = 2.dp, color = Color.White)
+                HomeScreenTextComponent(text = description, fontSize = 20 , fontWeight = FontWeight.Medium, color = Color.White, modifier = Modifier.wrapContentHeight())
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(start = 10.dp),
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.End
+            ) {
+                SelectDeselectButton(image = painterResource(id = R.drawable.check_white),
+                    buttonDescription = "done", size = 20, onClick = {}, paddingValue = 8, buttonColor = buttonColor
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                SelectDeselectButton(image = painterResource(id = R.drawable.cross_black),
+                    buttonDescription = "done", size = 20, onClick = {}, paddingValue = 8, buttonColor = buttonColor
+                )
+
+            }
         }
-        Column(
-            modifier = Modifier.fillMaxSize().padding(10.dp)
-        ){
-            SelectDeselectButton(image = painterResource(id = R.drawable.check_white), buttonDescription = "done", size = 30, onClick = {})
-        }
+
+
+
 
     }
 }
@@ -66,8 +93,12 @@ fun TaskBar(
 @Composable
 fun DisplayTaskBar() {
     Column(
-        modifier = Modifier.fillMaxSize().padding(20.dp)
+        modifier = Modifier.padding(20.dp)
     ) {
-        TaskBar(heading = "Team meeting", date = "9:00 am", description = "At Office, with boss prepare the presentation")
+        TaskBar(heading = "Team meeting", date = "9:00 am", description = "At Office, with boss prepare the presentation, ver 2.0", cardColor = colorResource(
+            id = R.color.primary_color), buttonColor = colorResource(id = R.color.black))
+        Spacer(modifier = Modifier.height(10.dp))
+        TaskBar(heading = "Submission", date = "1:00 pm", description = "Deadline of project submission", cardColor = colorResource(
+            id = R.color.black), buttonColor = colorResource(id = R.color.primary_color))
     }
 }

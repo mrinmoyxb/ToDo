@@ -94,7 +94,6 @@ fun LazyDisplayDayButton2(){
     LazyRow(
         modifier = Modifier.fillMaxSize().padding(20.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
-        //contentPadding = PaddingValues(horizontal = 10.dp)
     ){
         items(dayAndDate){day->
             if(today==day.date){
